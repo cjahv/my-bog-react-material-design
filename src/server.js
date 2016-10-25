@@ -28,9 +28,17 @@ import models from './data/models';
 import schema from './data/schema';
 import routes from './routes';
 import assets from './assets'; // eslint-disable-line import/no-unresolved
-import { port, auth } from './config';
+import https from 'https';
+import fs from "fs";
+import { port, auth,https_port } from './config';
 
 const app = express();
+
+const options = {
+  key: fs.readFileSync('./build/service.key'),
+  cert: fs.readFileSync('./build/service.crt'),
+  passphrase:'jahv'
+};
 
 //
 // Tell any CSS tooling (such as Material UI) to use all vendor prefixes if the
@@ -151,6 +159,10 @@ app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
 models.sync().catch(err => console.error(err.stack)).then(() => {
   app.listen(port, () => {
     console.log(`The server is running at http://localhost:${port}/`);
+  });
+
+  https.createServer(options, app).listen(https_port, function () {
+    console.log('Https server listening on port ' + https_port);
   });
 });
 /* eslint-enable no-console */
