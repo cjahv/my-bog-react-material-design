@@ -31,14 +31,13 @@ const news = {
       lastFetchTask = fetch(url)
         .then(response => response.json())
         .then(data => {
+          console.log('ok1');
           if (data.responseStatus === 200) {
             items = data.responseData.feed.entries;
+            console.log('ok');
           }
 
           return items;
-        })
-        .finally(() => {
-          lastFetchTask = null;
         });
 
       if (items.length) {
