@@ -7,16 +7,23 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
+import { GraphQLList as List,GraphQLInt } from 'graphql';
 import UserType from '../types/UserType';
+import {User} from '../models';
 
 const me = {
-  type: UserType,
-  resolve({ request }) {
-    return request.user && {
-      id: request.user.id,
-      email: request.user.email,
-    };
-  },
+    type: new List(UserType),
+    args:{
+        id: {
+            type: GraphQLInt
+        }
+    },
+    resolve() {
+        const args = arguments[1];
+        var options = {attributes: ['id', 'email']};
+        if(args&&args.id)options.where = {id:args.id};
+        return User.all(options);
+    },
 };
 
 export default me;

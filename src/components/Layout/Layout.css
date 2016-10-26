@@ -179,3 +179,10 @@ textarea {
     page-break-after: avoid;
   }
 }
+
+button,
+html [type="button"], /* 1 */
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: none; /* del default button style */
+}

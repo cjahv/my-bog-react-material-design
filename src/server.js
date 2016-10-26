@@ -34,12 +34,6 @@ import {port, auth, https_port} from './config';
 
 const app = express();
 
-const options = {
-    key: fs.readFileSync('./build/service.key'),
-    cert: fs.readFileSync('./build/service.crt'),
-    passphrase: 'jahv'
-};
-
 //
 // Tell any CSS tooling (such as Material UI) to use all vendor prefixes if the
 // user agent is not known.
@@ -161,8 +155,17 @@ models.sync().catch(err => console.error(err.stack)).then(() => {
         console.log(`The server is running at http://localhost:${port}/`);
     });
 
-    https.createServer(options, app).listen(https_port, () => {
-        console.log('Https server listening on port ' + https_port);
-    });
+    fs.exists('./build/service.key',(t)=>{
+        if(t){
+            const options = {
+                key: fs.readFileSync('./build/service.key'),
+                cert: fs.readFileSync('./build/service.crt'),
+                passphrase: 'jahv'
+            };
+            https.createServer(options, app).listen(https_port, () => {
+                console.log('Https server listening on port ' + https_port);
+            });
+        }
+    })
 });
 /* eslint-enable no-console */

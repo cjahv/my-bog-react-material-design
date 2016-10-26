@@ -20,10 +20,13 @@ function Html({ title, description, style, script, chunk, children }) {
         <meta name="description" content={description} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+        <link rel="stylesheet" href="//fonts.gmirror.org/css?family=Andika"/>
         {style && <style id="css" dangerouslySetInnerHTML={{ __html: style }} />}
       </head>
       <body>
-        <div id="app" dangerouslySetInnerHTML={{ __html: children }} />
+        <div id="app">
+          <children/>
+        </div>
         {script && <script src={script} />}
         {chunk && <script src={chunk} />}
         {analytics.google.trackingId &&

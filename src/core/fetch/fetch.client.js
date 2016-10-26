@@ -9,7 +9,15 @@
 
 import 'whatwg-fetch';
 
-export default self.fetch.bind(self);
+function localFetch(url, options) {
+    if (!options.headers)options.headers = {};
+    options.headers.Accept = options.headers['Content-Type'] = 'application/json';
+    if (!options.method)options.method = 'post';
+    options.credentials = 'include';
+    return self.fetch(url, options)
+}
+
+export default localFetch.bind(self);
 export const Headers = self.Headers;
 export const Request = self.Request;
 export const Response = self.Response;

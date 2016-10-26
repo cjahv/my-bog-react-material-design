@@ -8,26 +8,23 @@
  */
 
 import React, { PropTypes } from 'react';
-import cx from 'classnames';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from './Navigation.css';
-import Link from '../Link';
+import AutoComplete from 'material-ui/AutoComplete';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin();
 
-function Navigation({ className }) {
-  return (
-    <div className={cx(s.root, className)} role="navigation">
-      <Link className={s.link} to="/about">About</Link>
-      <Link className={s.link} to="/contact">Contact</Link>
-      <span className={s.spacer}> | </span>
-      <Link className={s.link} to="/login">Log in</Link>
-      <span className={s.spacer}>or</span>
-      <Link className={cx(s.link, s.highlight)} to="/register">Sign up</Link>
-    </div>
+function Navigation() {
+    return (
+      <MuiThemeProvider>
+        <AutoComplete
+            floatingLabelText="Search in this blog."
+            filter={AutoComplete.fuzzyFilter}
+            dataSource={['abc']}
+            maxSearchResults={5}
+            style={{position: 'absolute',top:0,right:0}}
+        />
+      </MuiThemeProvider>
   );
 }
 
-Navigation.propTypes = {
-  className: PropTypes.string,
-};
-
-export default withStyles(s)(Navigation);
+export default Navigation;
