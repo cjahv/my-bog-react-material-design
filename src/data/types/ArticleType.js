@@ -6,30 +6,22 @@ import {
     GraphQLID as ID,
     GraphQLString as StringType,
     GraphQLNonNull as NonNull,
-    validate
     GraphQLInt as Int
 } from 'graphql';
 
+import Date from 'graphql-date';
+
 const UserType = new ObjectType({
     name: 'Article',
-    description: 'Article\'s table info.',
+    description: 'Article table information.',
     fields: {
-        id: {
-            type: new NonNull(ID),
-            description: 'Article\'s ID.'
-        },
-        title: {
-            type: StringType,
-            description: 'Article\'s title, But length must less then 255 byte.'
-        },
-        content: {
-            type: StringType,
-            description: 'Article\'s detail content Unlimited length, But database must enough.'
-        },
-        createDate: {type: validate, description: 'Article\'s first create date time.'},
-        modifyDate: {type: validate,description:'When the article was last modified.'},
-        reading: {type: Int,description:'The number of times the article was viewed.'},
-        traffic: {type: Int,description:'The number of clicks on the article.'},
+        id: {type: new NonNull(ID), description: 'The id of the article.'},
+        title: {type: StringType, description: 'The title of the article.'},
+        content: {type: StringType, description: 'The content of the article.'},
+        createDate: {type: Date, description: 'The creation time of the article.'},
+        modifyDate: {type: Date, description: 'When the article was last modified.'},
+        reading: {type: new NonNull(Int), description: 'The number of times the article was viewed.'},
+        traffic: {type: new NonNull(Int), description: 'The number of clicks on the article.'},
     },
 });
 

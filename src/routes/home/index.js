@@ -17,13 +17,13 @@ export default {
 
   async action() {
     const resp = await fetch('/graphql', {
-      body: JSON.stringify({query: '{news{title,link,contentSnippet}}'})
+      body: JSON.stringify({query: '{article{title,createDate,reading}}'})
     });
     const { data } = await resp.json();
-    if (!data || !data.news) throw new Error('Failed to load the news feed.');
+    if (!data) throw new Error('Failed to load the news feed.');
     return {
       title: 'React Starter Kit',
-      component: <Home news={data.news} />,
+      component: <Home articles={data.article} />,
     };
   },
 

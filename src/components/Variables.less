@@ -1,0 +1,47 @@
+:root {
+    --font-family-base: 'Segoe UI', 'HelveticaNeue-Light', sans-serif;
+    --max-content-width: 1000pt;
+    --screen-xs-min: 480pt;
+    --screen-sm-min: 768pt;
+    --screen-md-min: 992pt;
+    --screen-lg-min: 1200pt;
+}
+
+@animation-time:.4s;
+
+.pre(@style,@value){
+    -webkit-@{style}: @value;
+    -moz-@{style}: @value;
+    -ms-@{style}: @value;
+        @{style}: @value;
+}
+
+.animation(@value){
+    .pre(animation,@value cubic-bezier(0.4, 0, 0.2, 1));
+}
+
+.animation-delay(@value){
+    .pre(animation-delay,@value);
+}
+
+.transition(@arg){
+    .pre(transition,@arg);
+}
+
+.keyframes(@name) {
+    @-webkit-keyframes @name {
+        .-frames(-webkit-)
+    }
+    @-moz-keyframes @name {
+        .-frames(-moz-)
+    }
+    @-o-keyframes @name {
+        .-frames(-o-)
+    }
+    @-ms-keyframes @name {
+        .-frames(-ms-)
+    }
+    @keyframes @name {
+        .-frames()
+    }
+}

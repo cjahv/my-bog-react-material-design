@@ -1,0 +1,15 @@
+@import "../MaterialDesign/Input";
+@import "../Variables";
+
+.search {
+    &:extend(.M-input);
+    position: absolute;
+    right: 0;
+    width: 20%;
+    box-shadow: 0 0 2pt #999;
+    .transition(box-shadow @animation-time);
+    &:focus{
+        box-shadow: 0 1pt 10pt 1pt #999;
+        outline: 0!important;
+    }
+}

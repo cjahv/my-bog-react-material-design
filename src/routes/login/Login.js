@@ -10,7 +10,7 @@
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Layout from '../../components/Layout';
-import s from './Login.css';
+import s from './Login.less';
 
 function Login({ title }) {
   return (

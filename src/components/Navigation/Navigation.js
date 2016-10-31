@@ -7,24 +7,14 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import React, { PropTypes } from 'react';
-import AutoComplete from 'material-ui/AutoComplete';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import injectTapEventPlugin from 'react-tap-event-plugin';
-injectTapEventPlugin();
+import React from 'react';
+import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import s from './Navigation.less';
 
 function Navigation() {
     return (
-      <MuiThemeProvider>
-        <AutoComplete
-            floatingLabelText="Search in this blog."
-            filter={AutoComplete.fuzzyFilter}
-            dataSource={['abc']}
-            maxSearchResults={5}
-            style={{position: 'absolute',top:0,right:0}}
-        />
-      </MuiThemeProvider>
-  );
+        <input className={s.search} placeholder="Search on the blog."/>
+    );
 }
 
-export default Navigation;
+export default withStyles(s)(Navigation);

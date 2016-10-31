@@ -1,0 +1,11 @@
+@import-once "../Variables";
+
+.M-dian {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background-color: #999;
+    @tmp:height @animation-time, width @animation-time,top @animation-time,left @animation-time;
+    .transition(@tmp);
+}

@@ -10,7 +10,7 @@
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Layout from '../../components/Layout';
-import s from './Content.css';
+import s from './Content.less';
 
 function Content({ path, title, content }) {
   return (

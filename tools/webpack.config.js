@@ -98,6 +98,23 @@ const config = {
         ],
       },
       {
+        test: /\.less$/,
+        loaders: [
+          'isomorphic-style-loader',
+          `css-loader?${JSON.stringify({
+            // CSS Loader https://github.com/webpack/css-loader
+            importLoaders: 1,
+            sourceMap: isDebug,
+            // CSS Modules https://github.com/css-modules/css-modules
+            modules: true,
+            localIdentName: isDebug ? '[name]-[local]-[hash:base64:5]' : '[hash:base64:5]',
+            // CSS Nano http://cssnano.co/options/
+            minimize: !isDebug,
+          })}`,
+          'less-loader',
+        ],
+      },
+      {
         test: /\.scss$/,
         loaders: [
           'isomorphic-style-loader',
